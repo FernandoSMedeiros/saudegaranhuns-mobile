@@ -52,7 +52,7 @@ function scene:show( event )
 
     elseif ( phase == "did" ) then
             
-      mui.newTextField({
+    mui.newTextField({
       parent = sceneGroup,
       labelText = "Cartão do SUS",
       name = "cart",      
@@ -85,14 +85,8 @@ function scene:show( event )
         iconText = "picture_in_picture",
         iconFont = mui.materialFont,
         iconFontColor = { 1, 1, 1, 1 },
-        --iconImage = "1484026171_02.png",
         touchpoint = true,
-        callBack = login,
-        -- callBackData = {
-        --     sceneDestination = "fun",
-        --     sceneTransitionColor = { 0, 0.73, 1 },
-        --     sceneTransitionAnimation = true
-        -- } -- scene fun.lua
+        callBack = login,        
         })
 
     mui.newRectButton({
@@ -114,10 +108,10 @@ function scene:show( event )
         touchpoint = true,
         callBack = mui.actionSwitchScene,
         callBackData = {
-            sceneDestination = "CadastroPaciente-Tela1",
+            sceneDestination = "CadastroPaciente",
             sceneTransitionColor = { 0.73, 0.73, 1 },
             sceneTransitionAnimation = true
-        } -- scene fun.lua
+        } -- scene CadastroPaciente.lua
         })
 
     mui.getRoundedRectButtonProperty("login", "text").x = display.getContentCenterX
@@ -132,7 +126,9 @@ end
 function scene:destroy( event )
  
     local sceneGroup = self.view
-    -- Code here runs prior to the removal of scene's view
+    
+    sceneGroup:removeSelf()
+    sceneGroup = nil
     mui.destroy()
  
 end
