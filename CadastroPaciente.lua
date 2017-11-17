@@ -11,6 +11,7 @@ local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
  
  
+ local paciente = {nome, sus, nascimento, endereco = {logradouro, bairro, numero}}
  
  
 -- -----------------------------------------------------------------------------------
@@ -162,7 +163,13 @@ function scene:show( event )
         iconFont = mui.materialFont,
         iconFontColor = { 1, 1, 1, 1 },
         touchpoint = true,
-        --callBack = login,        
+        callBack = mui.actionSwitchScene,
+        callBackData = {
+            sceneDestination = "Login",
+            sceneTransitionColor = { 0.73, 0.73, 1 },
+            sceneTransitionAnimation = true
+        } -- scene CadastroPaciente.lua
+            
         })
 
     mui.newRectButton({
