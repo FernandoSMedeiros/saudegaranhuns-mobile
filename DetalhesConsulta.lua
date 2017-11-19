@@ -1,5 +1,8 @@
 local composer = require( "composer" )
 local widget = require( "widget" )
+
+local mui = require( "materialui.mui" )
+local muiData = require( "materialui.mui-data" )
  
 local scene = composer.newScene()
  
@@ -24,6 +27,7 @@ function scene:create( event )
  
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
+    mui.init()
  
 end
  

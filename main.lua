@@ -3,7 +3,7 @@ local widget = require("widget")
 
 display.setStatusBar(display.HiddenStatusBar)
 
-composer.gotoScene("SolicitarConsulta")
+composer.gotoScene("DetalhesConsulta")
 
 
 -- local function button()
