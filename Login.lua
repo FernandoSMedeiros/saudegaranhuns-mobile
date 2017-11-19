@@ -6,11 +6,6 @@ local muiData = require( "materialui.mui-data" )
  
 local scene = composer.newScene()
  
--- -----------------------------------------------------------------------------------
--- Code outside of the scene event functions below will only be executed ONCE unless
--- the scene is removed entirely (not recycled) via "composer.removeScene()"
--- -----------------------------------------------------------------------------------
- 
 sus = 0
 
 function definirAnchorXeY (tabela)
@@ -23,32 +18,21 @@ local login = function (event)
 end
  
 
- local numCartao
- 
--- -----------------------------------------------------------------------------------
--- Scene event functions
--- -----------------------------------------------------------------------------------
- 
--- create()
+ local numCartao 
+
 function scene:create( event )
  
     local sceneGroup = self.view    
  
 end
- 
- 
--- show()
+
 function scene:show( event )
  
     local sceneGroup = self.view
-
     mui.init()
-
     local phase = event.phase
  
     if ( phase == "will" ) then
-        
-
 
     elseif ( phase == "did" ) then
             
@@ -119,10 +103,7 @@ function scene:show( event )
 
     end
 end
- 
- 
- 
--- destroy()
+
 function scene:destroy( event )
  
     local sceneGroup = self.view

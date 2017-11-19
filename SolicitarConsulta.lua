@@ -4,31 +4,21 @@ local widget = require( "widget" )
 local mui = require( "materialui.mui" )
 local muiData = require( "materialui.mui-data" )
  
-local scene = composer.newScene()
- 
--- -----------------------------------------------------------------------------------
--- Code outside of the scene event functions below will only be executed ONCE unless
--- the scene is removed entirely (not recycled) via "composer.removeScene()"
--- -----------------------------------------------------------------------------------
+local scene = composer.newScene() 
+
  
  consulta = {observacao = "", prioridade = "Nenhuma", especialidade = "Dentista"}
  
--- -----------------------------------------------------------------------------------
--- Scene event functions
--- -----------------------------------------------------------------------------------
  
 local centerX = display.contentCenterX
 
---local especialidade = {}
-
--- create()
 function scene:create( event )
  
     local sceneGroup = self.view 
 end
  
  
--- show()
+
 function scene:show( event )
  
     local sceneGroup = self.view
@@ -176,9 +166,6 @@ mui.newRectButton({
 
     mui.getWidgetProperty("observacao", "object").x = centerX
     mui.getWidgetProperty("observacao", "object").y = 118
-
-    --mui.getWidgetProperty("observacao", "doneButton").x = 120
-    --mui.getWidgetProperty("observacao", "doneButton").y = 118
 
     end
 end

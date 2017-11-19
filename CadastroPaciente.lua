@@ -5,20 +5,8 @@ local mui = require( "materialui.mui" )
 local muiData = require( "materialui.mui-data" ) 
 local scene = composer.newScene()
  
--- -----------------------------------------------------------------------------------
--- Code outside of the scene event functions below will only be executed ONCE unless
--- the scene is removed entirely (not recycled) via "composer.removeScene()"
--- -----------------------------------------------------------------------------------
+local paciente = {nome, sus, nascimento, endereco = {logradouro, bairro, numero}}
  
- 
- local paciente = {nome, sus, nascimento, endereco = {logradouro, bairro, numero}}
- 
- 
--- -----------------------------------------------------------------------------------
--- Scene event functions
--- -----------------------------------------------------------------------------------
- 
--- create()
 function scene:create( event )
  
     local sceneGroup = self.view
@@ -26,8 +14,6 @@ function scene:create( event )
  
 end
  
- 
--- show()
 function scene:show( event )
  
     local sceneGroup = self.view
@@ -89,8 +75,6 @@ function scene:show( event )
       inactiveColor = { 0.5, 0.5, 0.5, 1 },
       callBack = mui.textfieldCallBack
     })
-
-    ---------
 
     mui.newTextField({
       parent = sceneGroup,
@@ -196,25 +180,7 @@ function scene:show( event )
  
     end
 end
- 
- 
--- hide()
-function scene:hide( event )
- 
-    local sceneGroup = self.view
-    local phase = event.phase
- 
-    if ( phase == "will" ) then
-        -- Code here runs when the scene is on screen (but is about to go off screen)
- 
-    elseif ( phase == "did" ) then
-        -- Code here runs immediately after the scene goes entirely off screen
- 
-    end
-end
- 
- 
--- destroy()
+
 function scene:destroy( event )
  
     local sceneGroup = self.view
