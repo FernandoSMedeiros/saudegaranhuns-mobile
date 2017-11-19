@@ -92,7 +92,7 @@ function scene:show( event )
         touchpoint = true,
         callBack = mui.actionSwitchScene,
         callBackData = {
-            sceneDestination = "CadastroPaciente",
+            sceneDestination = "scenes.CadastroPaciente",
             sceneTransitionColor = { 0.73, 0.73, 1 },
             sceneTransitionAnimation = true
         } -- scene CadastroPaciente.lua

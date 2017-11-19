@@ -149,7 +149,7 @@ function scene:show( event )
         touchpoint = true,
         callBack = mui.actionSwitchScene,
         callBackData = {
-            sceneDestination = "Login",
+            sceneDestination = "scenes.Login",
             sceneTransitionColor = { 0.73, 0.73, 1 },
             sceneTransitionAnimation = true
         } -- scene CadastroPaciente.lua
