@@ -1,5 +1,8 @@
 local composer = require( "composer" )
 local widget = require( "widget" )
+
+local mui = require( "materialui.mui" )
+local muiData = require( "materialui.mui-data" )
  
 local scene = composer.newScene()
  
@@ -9,127 +12,19 @@ local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
  
  consulta = {observacao = "", prioridade = "Nenhuma", especialidade = "Dentista"}
-
-function definirAnchorXeY (tabela)
-  tabela.anchorX = 0
-  tabela.anchorY = 0
-end
-
-function observacaoListener (event)
-  if event.phase == "editing" then
-    consulta.observacao = event.text
-    print(consulta.observacao)
-  end
-end
-
-function semPrioridadeListener (event)
-    consulta.prioridade = "Sem prioridade"
-    print(consulta.prioridade)
-end
-
-function idosoListener (event)
-    consulta.prioridade = "Idoso"
-    print(consulta.prioridade)
-end
-
-function gestanteListener (event)
-    consulta.prioridade = "Gestante"
-    print(consulta.prioridade)
-end
-
-function bebeDeColoListener (event)
-    consulta.prioridade = "Bebê de colo"
-    print(consulta.prioridade)
-end
-
-function deficienteFisicoListener (event)
-    consulta.prioridade = "Deficiente fisico"
-    print(consulta.prioridade)
-end
-
-function dentistaListener (event)
-    consulta.especialidade = "Dentista"
-    print(consulta.especialidade)
-end
-
-function outrosListener (event)
-    consulta.especialidade = "Outros"
-    print(consulta.especialidade)
-end
-
-function semPrioridadeTextoListener (event)
-    if event.phase == "began" then
-        radioSemPrioridade:setState({isOn = true})
-        consulta.prioridade = "Sem prioridade"
-        print(consulta.prioridade)
-    end
-end
-
-function idosoTextoListener (event)
-    if event.phase == "began" then
-        radioIdoso:setState({isOn = true})
-        consulta.prioridade = "Idoso"
-        print(consulta.prioridade)
-    end
-end
-
-function gestanteTextoListener (event)
-    if event.phase == "began" then
-        radioGestante:setState({isOn = true})
-        consulta.prioridade = "Gestante"
-        print(consulta.prioridade)
-    end
-end
-
-function deficienteFisicoTextoListener (event)
-    if event.phase == "began" then
-        radioDeficienteFisico:setState({isOn = true})
-        consulta.prioridade = "Deficiente fisico"
-        print(consulta.prioridade)
-    end
-end
-
-function bebeDeColoTextoListener (event)
-    if event.phase == "began" then
-        radioBebeDeColo:setState({isOn = true})
-        consulta.prioridade = "Bebê de colo"
-        print(consulta.prioridade)
-    end
-end
-
-function dentistaTextoListener (event)
-    if event.phase == "began" then
-        radioDentista:setState({isOn = true})
-        consulta.especialidade = "Dentista"
-        print(consulta.especialidade)
-    end
-end
-
-function outrosTextoListener (event)
-    if event.phase == "began" then
-        radioOutros:setState({isOn = true})
-        consulta.especialidade = "Outros"
-        print(consulta.especialidade)
-    end
-end
-
-function printar( )
-    print("Consulta")
-    print("Observação",consulta.observacao)
-    print("Prioridade",consulta.prioridade)
-    print("Especialidade",consulta.especialidade)
-end
  
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
  
+local centerX = display.contentCenterX
+
+--local especialidade = {}
+
 -- create()
 function scene:create( event )
  
-    local sceneGroup = self.view
-    -- Code here runs when the scene is first created but has not yet appeared on screen
- 
+    local sceneGroup = self.view 
 end
  
  
@@ -142,295 +37,152 @@ function scene:show( event )
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
 
-        local cor = {0.26, 0.55, 0.79}
-        local alturaDaTela = display.contentHeight
-        local larguraDaTela = display.contentWidth
-
-        --[[background = display.newRect(0,0,display.contentWidth,display.contentHeight)
-        definirAnchorXeY(background)
-        background:setFillColor(.5,.5,.5)
-        sceneGroup:insert(background)]]
-
-        retanguloMenu = display.newRect( 0, 0, larguraDaTela, 42 )
-        definirAnchorXeY(retanguloMenu)
-        retanguloMenu:setFillColor(unpack(cor))
-        sceneGroup:insert(retanguloMenu)
-
-        textoMenu = display.newText({
-          text = "Cadastro de consulta",
-          width = 171,
-          height = 18,
-          x = 68,
-          y = 13,
-          fontSize = 14
-        })
-        definirAnchorXeY(textoMenu)
-        sceneGroup:insert(textoMenu)
-
-        retanguloObservacao = display.newRect(35, 98, 187, 27)
-        definirAnchorXeY(retanguloObservacao)
-        retanguloObservacao:setFillColor(unpack(cor))
-        sceneGroup:insert(retanguloObservacao)
-
-        textoObservacao = display.newText({
-          text = "Consulta",
-          x = 45,
-          y = 103,
-          width = 99,
-          height = 21,
-          fontSize = 14
-        })
-        definirAnchorXeY(textoObservacao)
-        sceneGroup:insert(textoObservacao)
-
-        inputObservacao = native.newTextBox(35,130,250,100)
-        inputObservacao.isEditable = true
-        inputObservacao.size=14
-        inputObservacao.placeholder = "Descreva aqui o motivo da consulta"
-        inputObservacao:addEventListener("userInput", observacaoListener)
-        definirAnchorXeY(inputObservacao)
-        sceneGroup:insert(inputObservacao)
-
-        retanguloPrioridade = display.newRect(35, 240, 187, 27)
-        definirAnchorXeY(retanguloPrioridade)
-        retanguloPrioridade:setFillColor(unpack(cor))
-        sceneGroup:insert(retanguloPrioridade)
-
-        textoPrioridade = display.newText({
-          text = "Prioridade",
-          x = 45,
-          y = 245,
-          width = 187,
-          height = 27,
-          fontSize = 14
-        })
-        definirAnchorXeY(textoPrioridade)
-        sceneGroup:insert(textoPrioridade)
-
-        prioridadeGroup = display.newGroup()
-         
-        radioSemPrioridade = widget.newSwitch({
-            x = 35,
-            y = 277,
-            height = 19,
-            width = 20,
-            style = "radio",
-            initialSwitchState = true,
-            onPress = semPrioridadeListener
-        })
-        definirAnchorXeY(radioSemPrioridade)
-        prioridadeGroup:insert(radioSemPrioridade)
-
-        textoSemPrioridade = display.newText({
-            text = "Sem prioridade",
-            x = 55,
-            y = 279,
-            width = 95,
-            height = 19,
-            fontSize = 14
-        })
-        textoSemPrioridade:addEventListener("touch", semPrioridadeTextoListener)
-        definirAnchorXeY(textoSemPrioridade)
-        sceneGroup:insert(textoSemPrioridade)
-
-        radioIdoso = widget.newSwitch({
-            x = 155,
-            y = 277,
-            height = 19,
-            width = 20,
-            style = "radio",
-            onPress = idosoListener
-        })
-        prioridadeGroup:insert(radioIdoso)
-        definirAnchorXeY(radioIdoso)
-         
-        textoIdoso = display.newText({
-            text = "Idoso",
-            x = 175,
-            y = 279,
-            width = 35,
-            height = 19,
-            fontSize = 14
-        })
-        definirAnchorXeY(textoIdoso)
-        textoIdoso:addEventListener("touch", idosoTextoListener)
-        sceneGroup:insert(textoIdoso)
-
-        radioGestante = widget.newSwitch({
-            x = 215,
-            y = 277,
-            height = 19,
-            width = 20,
-            style = "radio",
-            onPress = gestanteListener
-        })
-        prioridadeGroup:insert(radioGestante)
-        definirAnchorXeY(radioGestante)
-         
-        textoGestante = display.newText({
-            text = "Gestante",
-            x = 235,
-            y = 279,
-            width = 100,
-            height = 19,
-            fontSize = 14
-        })
-        definirAnchorXeY(textoGestante)
-        textoGestante:addEventListener("touch", gestanteTextoListener)
-        sceneGroup:insert(textoGestante)
-
-        radioDeficienteFisico = widget.newSwitch({
-            x = 35,
-            y = 300,
-            height = 19,
-            width = 20,
-            style = "radio",
-            onPress = deficienteFisicoListener
-        })
-        prioridadeGroup:insert(radioDeficienteFisico)
-        definirAnchorXeY(radioDeficienteFisico)
-         
-        textoDeficienteFisico = display.newText({
-            text = "Deficiente Fisico",
-            x = 55,
-            y = 302,
-            width = 103,
-            height = 19,
-            fontSize = 14
-        })
-        definirAnchorXeY(textoDeficienteFisico)
-        textoDeficienteFisico:addEventListener("touch", deficienteFisicoTextoListener)
-        sceneGroup:insert(textoDeficienteFisico)
-
-        radioBebeDeColo = widget.newSwitch({
-            x = 163,
-            y = 300,
-            height = 19,
-            width = 20,
-            style = "radio",
-            onPress = bebeDeColoListener
-        })
-        prioridadeGroup:insert(radioBebeDeColo)
-        definirAnchorXeY(radioBebeDeColo)
-         
-        textoBebeDeColo = display.newText({
-            text = "Bebê de colo",
-            x = 183,
-            y = 302,
-            width = 103,
-            height = 19,
-            fontSize = 14
-        })
-        definirAnchorXeY(textoBebeDeColo)
-        textoBebeDeColo:addEventListener("touch", bebeDeColoTextoListener)
-        sceneGroup:insert(textoBebeDeColo)
-         
-        sceneGroup:insert(prioridadeGroup)
-
-        retanguloEspecialidade = display.newRect(35, 325, 187, 27)
-        definirAnchorXeY(retanguloEspecialidade)
-        retanguloEspecialidade:setFillColor(unpack(cor))
-        sceneGroup:insert(retanguloEspecialidade)
-
-        textoEspecialidade = display.newText({
-          text = "Especialidade",
-          x = 45,
-          y = 330,
-          width = 99,
-          height = 21,
-          fontSize = 14
-        })
-        definirAnchorXeY(textoEspecialidade)
-        sceneGroup:insert(textoEspecialidade)
-
-        especialidadeGroup = display.newGroup()
-         
-        radioDentista = widget.newSwitch({
-            x = 35,
-            y = 357,
-            height = 19,
-            width = 20,
-            style = "radio",
-            initialSwitchState = true,
-            onPress = dentistaListener
-        })
-        definirAnchorXeY(radioDentista)
-        especialidadeGroup:insert(radioDentista)
-
-        textoDentista = display.newText({
-            text = "Dentista",
-            x = 55,
-            y = 359,
-            width = 52,
-            height = 19,
-            fontSize = 14
-        })
-        textoDentista:addEventListener("touch", dentistaTextoListener)
-        definirAnchorXeY(textoDentista)
-        sceneGroup:insert(textoDentista)
-
-        radioOutros = widget.newSwitch({
-            x = 113,
-            y = 357,
-            height = 19,
-            width = 20,
-            style = "radio",
-            onPress = outrosListener
-        })
-        especialidadeGroup:insert(radioOutros)
-        definirAnchorXeY(radioOutros)
-         
-        textoOutros = display.newText({
-            text = "Outros",
-            x = 133,
-            y = 359,
-            width = 45,
-            height = 19,
-            fontSize = 14
-        })
-        definirAnchorXeY(textoOutros)
-        textoOutros:addEventListener("touch", outrosTextoListener)
-        sceneGroup:insert(textoOutros)
-
-        sceneGroup:insert(especialidadeGroup)
-
-        local botaoCadastrar = widget.newButton({
-            label = "Cadastrar",
-            labelColor = {default = {0}, over={0}},
-            fillColor = {default = {1}, over = {0.1,0.1,0.2}},
-            strokeColor = {default = cor, over = cor},
-            strokeWidth = 8,
-            cornerRadius = 22,
-            x = display.contentCenterX,
-            y = 450,
-            shape = "roundedRect",
-            onPress = printar
-        })
-        sceneGroup:insert(botaoCadastrar)
-
     elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen
  
-    end
-end
- 
- 
--- hide()
-function scene:hide( event )
- 
-    local sceneGroup = self.view
-    local phase = event.phase
- 
-    if ( phase == "will" ) then
-        -- Code here runs when the scene is on screen (but is about to go off screen)
+    mui.init()
 
-    elseif ( phase == "did" ) then
-        -- Code here runs immediately after the scene goes entirely off screen
- 
+    local numOfRowsToShow = 2
+        mui.newSelect({
+        name = "especialidade",
+        labelText = "Especialidade",
+        --text = "selecione",
+        font = native.systemFont,
+        textColor = { 0.4, 0.4, 0.4 },
+        fieldBackgroundColor = { 1, 1, 1, 1 },
+        rowColor = { default={ 1, 1, 1, 1 }, over={ 1, 0.5, 0, 0.2 } }, -- default is the highlighting
+        rowBackgroundColor = { 1, 1, 1, 1 }, -- the drop down color of each row
+        touchpointColor = { 0.4, 0.4, 0.4 }, -- the touchpoint color
+        activeColor = { 0.12, 0.67, 0.27, 1 },
+        inactiveColor = { 0.4, 0.4, 0.4, 1 },
+        strokeColor = { 0.4, 0.4, 0.4, 1 },
+        strokeWidth = 2,
+        width = 200,
+        height = 30,
+        listHeight = 30 * numOfRowsToShow,
+        x = 120,
+        y = 240,
+        callBackTouch = mui.onRowTouchSelector,
+        scrollListener = nil,
+        list = { -- if 'key' use it for 'id' in the table row
+            { key = "1", text = "Dentista", value = "1", isCategory = false, backgroundColor = {1,1,1,1} },
+            { key = "2", text = "Outros", value = "2", isCategory = false },
+        
+        },
+        scrollView = scrollView,
+    })
+
+    local numOfRows = 4
+    mui.newSelect({
+        name = "prioridade",
+        labelText = "Prioridade",
+        --text = "selecione",
+        font = native.systemFont,
+        textColor = { 0.4, 0.4, 0.4 },
+        fieldBackgroundColor = { 1, 1, 1, 1 },
+        rowColor = { default={ 1, 1, 1, 1 }, over={ 1, 0.5, 0, 0.2 } }, -- default is the highlighting
+        rowBackgroundColor = { 1, 1, 1, 1 }, -- the drop down color of each row
+        touchpointColor = { 0.4, 0.4, 0.4 }, -- the touchpoint color
+        activeColor = { 0.12, 0.67, 0.27, 1 },
+        inactiveColor = { 0.4, 0.4, 0.4, 1 },
+        strokeColor = { 0.4, 0.4, 0.4, 1 },
+        strokeWidth = 2,
+        width = 200,
+        height = 30,
+        listHeight = 30 * numOfRows,
+        x = 120,
+        y = 240,
+        callBackTouch = mui.onRowTouchSelector,
+        scrollListener = nil,
+        list = { -- if 'key' use it for 'id' in the table row
+            { key = "1", text = "Nenhuma", value = "1", isCategory = false, backgroundColor = {1,1,1,1} },
+            { key = "2", text = "Gestante", value = "2", isCategory = false },
+            { key = "3", text = "Idoso", value = "2", isCategory = false },
+            { key = "4", text = "Deficiente Físico", value = "2", isCategory = false },
+            { key = "5", text = "Bebe de colo", value = "2", isCategory = false },
+        
+        },
+        scrollView = scrollView,
+    })
+
+
+    mui.newTextBox({
+    name = "observacao",
+    labelText = "Observações",
+    text = "",
+    font = native.systemFont,
+    fontSize = 16,
+    textBoxFontSize = 16,
+    width = 200,
+    height = 100,
+    x = 120,
+    y = 355,
+    trimFakeTextAt = 80, -- trim at 1..79 characters.
+    activeColor = { 0.12, 0.67, 0.27, 1 },
+    inactiveColor = { 0.4, 0.4, 0.4, 1 },
+    callBack = mui.textfieldCallBack,
+    isEditable = true,
+    doneButton = {
+        width = 100,
+        height = 30,
+        fillColor = { 0.25, 0.75, 1, 1 },
+        textColor = { 1, 1, 1 },
+        text = "done",
+        iconText = "done",
+        iconFont = mui.materialFont,
+        x = 102,
+        y = 30,
+        iconFontColor = { 1, 1, 1, 1 },
+        radius = mui.getScaleX(8), -- set to 0 for newRectButton() instead of rounded
+    },
+    overlayBackgroundColor = { 1, 1, 1, 1 },
+    overlayTextBoxBackgroundColor = { .9, .9, .9, 1 },
+    overlayTextBoxHeight = 100,
+    scrollView = scrollView
+})
+
+
+mui.newRectButton({
+    parent = mui.getParent(),
+    name = "solicitar",
+    text = "Solicitar Consulta",
+    width = 150,
+    height = 30,
+    x = centerX,
+    y = 426,
+    font = native.systemFont,
+    fontSize = 16,
+    fillColor = { 0.25, 0.75, 1, 1 },
+    textColor = { 1, 1, 1 },
+    iconText = "picture_in_picture",
+    iconFont = mui.materialFont,
+    iconFontColor = { 1, 1, 1, 1 },
+    --iconImage = "1484026171_02.png",
+    touchpoint = true,
+    -- callBack = mui.actionSwitchScene,
+    -- callBackData = {
+    --     sceneDestination = "fun",
+    --     sceneTransitionColor = { 0, 0.73, 1 },
+    --     sceneTransitionAnimation = true
+    -- } 
+})
+
+
+    mui.getWidgetProperty("prioridade", "object").x = centerX
+    mui.getWidgetProperty("prioridade", "object").y = 230
+
+    mui.getWidgetProperty("especialidade", "object").x = centerX
+    mui.getWidgetProperty("especialidade", "object").y = 318
+
+    mui.getWidgetProperty("observacao", "object").x = centerX
+    mui.getWidgetProperty("observacao", "object").y = 118
+
+    --mui.getWidgetProperty("observacao", "doneButton").x = 120
+    --mui.getWidgetProperty("observacao", "doneButton").y = 118
+
     end
 end
- 
- 
+
 -- destroy()
 function scene:destroy( event )
  
