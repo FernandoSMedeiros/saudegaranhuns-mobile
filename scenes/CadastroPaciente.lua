@@ -5,7 +5,7 @@ local mui = require( "materialui.mui" )
 local muiData = require( "materialui.mui-data" ) 
 local scene = composer.newScene()
  
-local paciente = {nome, sus, nascimento, endereco = {logradouro, bairro, numero}}
+local paciente = {nome, sus, nascimento, endereco = {logradouro, bairro, numero}, posto}
  
 function scene:create( event )
  
@@ -18,15 +18,12 @@ function scene:show( event )
  
     local sceneGroup = self.view
     local phase = event.phase
-    
-    mui.init()
- 
+     
     if ( phase == "will" ) then
-        -- Code here runs when the scene is still off screen (but is about to come on screen)
- 
-    elseif ( phase == "did" ) then
         
-    display.newRect(sceneGroup, display.contentCenterX, 0, 320, 38 ).setFillColor = {1, 0, 1}
+        mui.init()
+
+        display.newRect(sceneGroup, display.contentCenterX, 0, 320, 38 ).setFillColor = {1, 0, 1}
            
     mui.newTextField({
       parent = sceneGroup,
@@ -151,7 +148,7 @@ function scene:show( event )
         callBackData = {
             sceneDestination = "scenes.Login",
             sceneTransitionColor = { 0.73, 0.73, 1 },
-            sceneTransitionAnimation = true
+            sceneTransitionAnimation = false
         } -- scene CadastroPaciente.lua
             
         })
@@ -178,6 +175,9 @@ function scene:show( event )
     mui.getRoundedRectButtonProperty("cadastrar", "text").x = display.getContentCenterX
     mui.getRoundedRectButtonProperty("voltar", "text").x = display.getContentCenterX
  
+    elseif ( phase == "did" ) then
+        
+     
     end
 end
 

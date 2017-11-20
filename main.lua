@@ -3,4 +3,4 @@ local widget = require("widget")
 
 display.setStatusBar(display.HiddenStatusBar)
 
-composer.gotoScene("scenes.Login")
+composer.gotoScene("scenes.MenuPrincipal")

@@ -1,65 +1,34 @@
 local composer = require( "composer" )
-local widget = require( "widget" )
-
+ 
 local mui = require( "materialui.mui" )
 local muiData = require( "materialui.mui-data" )
- 
+
 local scene = composer.newScene()
  
-sus = 0
 
-function definirAnchorXeY (tabela)
-  tabela.anchorX = 0
-  tabela.anchorY = 0
-end
-
-local login = function (event)  
-  print("LOGIN-TEST")
-end
- 
-
- local numCartao 
 
 function scene:create( event )
  
-    local sceneGroup = self.view    
+    local sceneGroup = self.view
+    -- Code here runs when the scene is first created but has not yet appeared on screen
  
-end
+end 
 
 function scene:show( event )
  
     local sceneGroup = self.view
-    
     local phase = event.phase
  
     if ( phase == "will" ) then
 
-      mui.init()
-
-      mui.newTextField({
-      parent = sceneGroup,
-      labelText = "Cartão do SUS",
-      name = "cart",      
-      --text = "Número Cartão do SUS",
-      font = native.systemFont,
-      width = 200,
-      height = 24,
-      x = display.contentCenterX,
-      y = display.contentCenterY-50,
-      trimAtLength = 5,
-      activeColor = { 0, 1, 1, 1 },
-      inactiveColor = { 0.5, 0.5, 0.5, 1 },
-      callBack = mui.textfieldCallBack
-    })
-
-    mui.getTextFieldProperty("cart", "label").x = display.getContentCenterX
+    mui.init()
 
     mui.newRectButton({
         parent = sceneGroup,
-        name = "login",
-        text = "Login",
-        width = 100,
-        height = 30,
+        name = "solicitarConsulta",
+        text = "Nova Consulta",
+        width = 150,
+        height = 40,
         x = display.getContentCenterX,
         y = display.contentCenterY,
         font = native.systemFont,
@@ -69,42 +38,59 @@ function scene:show( event )
         iconText = "picture_in_picture",
         iconFont = mui.materialFont,
         iconFontColor = { 1, 1, 1, 1 },
-        touchpoint = true,
-        callBack = login,        
-        })
+        touchpoint = true,        
+        callBack = mui.actionSwitchScene,
+        callBackData = {
+            sceneDestination = "scenes.SolicitarConsulta",
+            sceneTransitionColor = { 0.73, 0.73, 1 },
+            sceneTransitionAnimation = false
+        }    
+    })
 
     mui.newRectButton({
         parent = sceneGroup,
-        name = "cadastrar",
-        text = "Cadastrar",
-        width = 100,
-        height = 30,
+        name = "verConsulta",
+        text = "Ver Consultas",
+        width = 150,
+        height = 40,
         x = display.getContentCenterX,
-        y = display.contentCenterY+50,
+        y = display.contentCenterY-50,
         font = native.systemFont,
         fontSize = 16,
         fillColor = { 0.25, 0.75, 1, 1 },
         textColor = { 1, 1, 1 },
-        iconText = "picture_in_picture",
+        iconText = "home",
         iconFont = mui.materialFont,
         iconFontColor = { 1, 1, 1, 1 },
-        --iconImage = "1484026171_02.png",
-        touchpoint = true,
+        touchpoint = true,        
         callBack = mui.actionSwitchScene,
         callBackData = {
-            sceneDestination = "scenes.CadastroPaciente",
+            sceneDestination = "scenes.ListagemConsultas",
             sceneTransitionColor = { 0.73, 0.73, 1 },
             sceneTransitionAnimation = false
-        } -- scene CadastroPaciente.lua
-        })
+        }   
+    })
 
-    mui.getRoundedRectButtonProperty("login", "text").x = display.getContentCenterX
-    mui.getRoundedRectButtonProperty("cadastrar", "text").x = display.getContentCenterX
-
+    --mui.getRoundedRectButtonProperty("solicitarConsulta", "text").x = display.contentCenterX 
+    --mui.getRoundedRectButtonProperty("verConsulta", "text").x = display.contentCenterX
+ 
     elseif ( phase == "did" ) then
-            
-    
-
+        -- Code here runs when the scene is entirely on screen
+ 
+    end
+end
+ 
+function scene:hide( event )
+ 
+    local sceneGroup = self.view
+    local phase = event.phase
+ 
+    if ( phase == "will" ) then
+        -- Code here runs when the scene is on screen (but is about to go off screen)
+ 
+    elseif ( phase == "did" ) then
+        -- Code here runs immediately after the scene goes entirely off screen
+ 
     end
 end
 
@@ -115,6 +101,7 @@ function scene:destroy( event )
     sceneGroup:removeSelf()
     sceneGroup = nil
     mui.destroy()
+ 
  
 end
  
