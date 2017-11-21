@@ -165,7 +165,7 @@ function scene:show( event )
         fontSize = 16,
         fillColor = { 0.25, 0.75, 1, 1 },
         textColor = { 1, 1, 1 },
-        iconText = "picture_in_picture",
+        iconText = "plus",
         iconFont = mui.materialFont,
         iconFontColor = { 1, 1, 1, 1 },
         touchpoint = true,
