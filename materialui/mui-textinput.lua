@@ -203,7 +203,7 @@ function M.newTextField(options)
     muiData.widgetDict[options.name]["textfieldfake"].dialogName = options.dialogName
     muiData.widgetDict[options.name]["container"]:insert( muiData.widgetDict[options.name]["textfieldfake"] )
 
-    muiData.widgetDict[options.name]["textfield"].placeholder = "Subject"
+    -- muiData.widgetDict[options.name]["textfield"].placeholder = "Subject"
     muiData.widgetDict[options.name]["textfield"].callBack = options.callBack
     muiData.widgetDict[options.name]["textfield"]:addEventListener( "userInput", M.textListener )
     muiData.widgetDict[options.name]["container"]:insert( muiData.widgetDict[options.name]["textfield"] )
@@ -537,7 +537,7 @@ function M.createTextBoxOverlay( widget )
 
         muiData.widgetDict[options.name]["textfield"] = native.newTextBox( 0, 0, options.width, options.overlayTextBoxHeight )
         muiData.widgetDict[options.name]["textfield"].name = options.name
-       -- muiData.widgetDict[options.name]["textfield"].hasBackground = false
+        muiData.widgetDict[options.name]["textfield"].hasBackground = false
         muiData.widgetDict[options.name]["textfield"].isEditable = options.isEditable
         muiData.widgetDict[options.name]["textfield"].isVisible = false
         muiData.widgetDict[options.name]["textfield"].font = native.newFont( options.font, options.textBoxFontSize ) -- * 0.55 
