@@ -8,20 +8,20 @@ local especialidade = e:criar()
 
 local Consulta = {especialidade, prioridade, status, dataSolicitação, dataAgendamento, paciente}
 
-function Consulta.criar(especialidade, prioridade, status, dataSolicitação, dataAgendamento, paciente)
+function Consulta:criar(especialidade, prioridade, status, dataSolicitação, dataAgendamento, paciente)
 	
-	Consulta.especialidade = especialidade[especialidade]
-	Consulta.status = status[status]
-	Consulta.prioridade = prioridade[prioridade]
-	Consulta.dataSolicitação = datadataSolicitação
-	Consulta.dataAgendamento = datadataAgendamento
-	Consulta.paciente = paciente
+	self.especialidade = especialidade[especialidade]
+	self.status = status[status]
+	self.prioridade = prioridade[prioridade]
+	self.dataSolicitação = datadataSolicitação
+	self.dataAgendamento = datadataAgendamento
+	self.paciente = paciente
 
 	return Consulta
 end
 
-function Consulta.json()
-	local json = json.encode(Consulta)
+function Consulta:json()
+	local json = json.encode(self)
 end
 
 return Consulta
