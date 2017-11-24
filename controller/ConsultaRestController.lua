@@ -1,7 +1,7 @@
 local json = require("json")
 local consulta = require("model.Consulta")
 
-local PacienteRestController = {view = nil, consulta = {}}
+local ConsultaRestController = {view = nil, consulta = {}}
 
 function ConsultaRestController.criar()
 	ConsultaRestController.consulta = consulta:criar()
@@ -11,7 +11,7 @@ end
 function ConsultaRestController.salvar(event)
 	if event.phase == "began" then
 		local headers = {}
-		local body = json.encode(ConsultaRestController.consulta)
+		local body = ConsultaRestController.consulta.json()
 		local params = {}
   
 		headers["Content-Type"] = "application/json; charset=utf-8" 
