@@ -1,3 +1,5 @@
+display.setDefault( background, {1, 1, 1} )
+
 local composer = require( "composer" )
  
 
@@ -5,7 +7,7 @@ local mui = require( "materialui.mui" )
 local muiData = require( "materialui.mui-data" ) 
 local scene = composer.newScene()
  
-local paciente = {nome, sus, nascimento, endereco = {logradouro, bairro, numero}, posto}
+local paciente = {nome, sus, nascimento, endereco = {}, posto = }
  
 function scene:create( event )
  
