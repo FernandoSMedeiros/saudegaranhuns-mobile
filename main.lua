@@ -1,13 +1,6 @@
-
-
-
-
-
-
-
-
-	
-composer.gotoScene("scenes.MenuPrincipal"
-display.setStatusBar(display.HiddenStatusBar)
 local composer = require("composer")
 local widget = require("widget")
+
+display.setStatusBar(display.HiddenStatusBar)
+
+composer.gotoScene("scenes.MenuPrincipal")
