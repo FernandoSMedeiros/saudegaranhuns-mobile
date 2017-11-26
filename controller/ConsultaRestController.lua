@@ -22,22 +22,11 @@ function ConsultaRestController.salvar(event)
 	end	
 end
 
-function PacienteRestController.todos(event)
-	
-	local x = {}
-
+function PacienteRestController.todos(event)	
 	if event.phase == "began" then
-		x = json.decode(network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/", "GET", networkListener)) 
-	end
-
-	return x	
+		return json.decode(network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/", "GET", networkListener)) 
+	end	
 end
-
--- function PacienteRestController.deletar(event)
--- 	if event.phase == "began" then
--- 		network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/" + tabela.id, "DELETE", networkListener)
--- 	end
--- end
 
 function ConsultaRestController.atualizar(event)
 	if event.phase == "began" then

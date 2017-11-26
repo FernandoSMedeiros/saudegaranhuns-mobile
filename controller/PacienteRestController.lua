@@ -1,9 +1,7 @@
--- Todas as URIs serão alteradas de acordo com o servidor
-
 local json = require("json")
 local paciente = require("model.Paciente")
 
-local PacienteRestController = {view = nil, paciente = {}}
+local PacienteRestController = {paciente = {}}
 
 function PacienteRestController.criar()
 	PacienteRestController.paciente = paciente:criar()
@@ -24,17 +22,13 @@ function PacienteRestController.salvar(event)
 	end	
 end
 
--- function PacienteRestController.todos(event)
--- 	if event.phase == "began" then
--- 		network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/", "GET", networkListener)
--- 	end	
--- end
-
--- function PacienteRestController.deletar(event)
--- 	if event.phase == "began" then
--- 		network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/" + tabela.id, "DELETE", networkListener)
--- 	end
--- end
+function networkListener(event) 
+    if ( event.isError ) then
+        print( "Network error: ", event.response )
+    else
+        print ( "RESPONSE: " .. event.response )
+    end
+end
 
 function PacienteRestController.atualizar(event)
 	if event.phase == "began" then
@@ -50,10 +44,4 @@ function PacienteRestController.atualizar(event)
 	end	
 end
 
-function networkListener(event) 
-    if ( event.isError ) then
-        print( "Network error: ", event.response )
-    else
-        print ( "RESPONSE: " .. event.response )
-    end
-end
+return PacienteRestController

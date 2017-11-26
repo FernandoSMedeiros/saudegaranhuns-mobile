@@ -1,24 +1,17 @@
 local composer = require( "composer" )
 local widget = require( "widget" )
-
 local mui = require( "materialui.mui" )
 local muiData = require( "materialui.mui-data" )
- 
+local login = require( "controller.LoginRestController" )
+local usuario = require( "model.Usuario" )
+
+local loginRestController = login:criar()
+
+local log = function()
+  loginRestController:login()
+end
+
 local scene = composer.newScene()
- 
-sus = 0
-
-function definirAnchorXeY (tabela)
-  tabela.anchorX = 0
-  tabela.anchorY = 0
-end
-
-local login = function (event)  
-  print("LOGIN-TEST")
-end
- 
-
- local numCartao 
 
 function scene:create( event )
  
@@ -27,9 +20,8 @@ function scene:create( event )
 end
 
 function scene:show( event )
- 
-    local sceneGroup = self.view
-    
+
+    local sceneGroup = self.view    
     local phase = event.phase
  
     if ( phase == "will" ) then
@@ -53,6 +45,8 @@ function scene:show( event )
     })
 
     mui.getTextFieldProperty("cart", "label").x = display.getContentCenterX
+    loginRestController.model.cartao = mui.getTextFieldProperty("cart", "text")
+
 
     mui.newRectButton({
         parent = sceneGroup,
@@ -88,7 +82,7 @@ function scene:show( event )
             sceneDestination = "scenes.CadastroPaciente",
             sceneTransitionColor = { 0.73, 0.73, 1 },
             sceneTransitionAnimation = false
-        } -- scene CadastroPaciente.lua
+        } 
         })
 
     mui.getRoundedRectButtonProperty("login", "text").x = display.getContentCenterX
