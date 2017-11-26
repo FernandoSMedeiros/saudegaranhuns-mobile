@@ -7,7 +7,7 @@ local mui = require( "materialui.mui" )
 local muiData = require( "materialui.mui-data" ) 
 local scene = composer.newScene()
  
-local paciente = {nome, sus, nascimento, endereco = {}, posto = }
+local paciente = {nome, sus, nascimento, endereco = {}, posto = {}}
  
 function scene:create( event )
  
