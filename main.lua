@@ -1,8 +1,8 @@
 local composer = require("composer")
 local widget = require("widget")
 
-local endereco = require("model.Endereco")
-
 display.setStatusBar(display.HiddenStatusBar)
+
+local consulta = require("model.Consulta")
 
 composer.gotoScene("scenes.MenuPrincipal")

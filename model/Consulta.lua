@@ -1,27 +1,29 @@
-local p = require("enumerador.Prioridade")
-local s = require("enumerador.Status")
-local e = require("enumerador.Especialidade")
+local json = require("json")
+
+local p = require("model.enumerador.Prioridade")
+local s = require("model.enumerador.Status")
+local e = require("model.enumerador.Especialidade")
 
 local prioridade = p:criar()
 local status = s:criar()
 local especialidade = e:criar()
 
-local Consulta = {especialidade, prioridade, status, dataSolicitação, dataAgendamento, paciente}
+local Consulta = { especialidade, prioridade, status, dataSolicitacao, dataAgendamento, paciente }
 
-function Consulta:criar(especialidade, prioridade, status, dataSolicitação, dataAgendamento, paciente)
+function Consulta:criar (especialidade, prioridade, status, dataSolicitacao, dataAgendamento, paciente)
 	
 	self.especialidade = especialidade[especialidade]
 	self.status = status[status]
 	self.prioridade = prioridade[prioridade]
-	self.dataSolicitação = datadataSolicitação
+	self.dataSolicitacao = datadataSolicitacao
 	self.dataAgendamento = datadataAgendamento
 	self.paciente = paciente
 
-	return Consulta
+	return self
 end
 
 function Consulta:json()
-	local json = json.encode(self)
+	return json.encode(self)
 end
 
 return Consulta

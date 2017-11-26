@@ -6,7 +6,7 @@ LoginRestController = {
 }
 
 function LoginRestController:criar()
-	LoginRestController[1] = 
+	LoginRestController[1] = 0
 
 	return cartao
 end
