@@ -2,27 +2,34 @@ local composer = require( "composer" )
 local widget = require( "widget" )
 local mui = require( "materialui.mui" )
 local muiData = require( "materialui.mui-data" )
-local login = require( "controller.LoginRestController" )
+local loginController = require( "controller.LoginRestController" )
 local usuario = require( "model.Usuario" )
 
 local scene = composer.newScene()
 
+local logar = function ()
+  loginRestController.model.cartao = mui.getTextFieldProperty("cart", "value")
+  loginRestController:login()
+end
+
 function scene:create( event )
  
-    local sceneGroup = self.view    
+  local sceneGroup = self.view
+
+  loginRestController = loginController:criar()    
  
 end
 
 function scene:show( event )
 
-    local sceneGroup = self.view    
-    local phase = event.phase
+  local sceneGroup = self.view    
+  local phase = event.phase
  
-    if ( phase == "will" ) then
+  if ( phase == "will" ) then
 
-      mui.init()
+    mui.init()
 
-      mui.newTextField({
+    mui.newTextField({
       parent = sceneGroup,
       labelText = "Cartão do SUS",
       name = "cart",      
@@ -53,8 +60,8 @@ function scene:show( event )
         fillColor = { 0.25, 0.75, 1, 1 },
         textColor = { 1, 1, 1 },
         touchpoint = true,
-        --callBack = login,        
-        })
+        callBack = logar,        
+    })
 
     mui.newRectButton({
         parent = sceneGroup,
@@ -75,15 +82,13 @@ function scene:show( event )
             sceneTransitionColor = { 0.73, 0.73, 1 },
             sceneTransitionAnimation = false
         } 
-        })
+    })
 
     mui.getRoundedRectButtonProperty("login", "text").x = display.getContentCenterX
     mui.getRoundedRectButtonProperty("cadastrar", "text").x = display.getContentCenterX
 
     elseif ( phase == "did" ) then
-            
     
-
     end
 end
 
@@ -96,7 +101,6 @@ function scene:destroy( event )
     mui.destroy()
  
 end
- 
  
 -- -----------------------------------------------------------------------------------
 -- Scene event function listeners
