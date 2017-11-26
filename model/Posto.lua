@@ -2,9 +2,9 @@ local json = require("json")
 
 local Posto = {nome, endereco}
 
-function Posto:criar(nome, endereco)
-	self.nome = nome
-	self.endereco = endereco
+function Posto:criar()
+	self.nome = nil
+	self.endereco = nil
 	return self
 end
 
