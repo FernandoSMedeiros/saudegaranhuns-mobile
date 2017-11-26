@@ -1,12 +1,15 @@
-local endereco = require("Endereco")
+local endereco = require("model.Endereco")
 local json = require("json")
+local posto = require("model.Posto")
 
-local Paciente = {nome, dataNasccimento, endereco, cartaoSus}
+local Paciente = {nome, dataNascimento, endereco, cartaoSus, posto}
 
-function Paciente:criar(nome, endereco, cartaoSus)
-	self.nome = nome
-	self.endereco = endereco
-	self.cartaoSus = cartaoSus
+function Paciente:criar()
+	self.nome = nil
+	self.endereco = endereco:criar()
+	self.cartaoSus = nil
+	self.dataNascimento = nil
+	self.posto = posto:criar()
 	return self
 end
 

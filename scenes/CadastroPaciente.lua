@@ -1,18 +1,27 @@
-display.setDefault( background, {1, 1, 1} )
+local controller = require("controller.PacienteRestController")
 
 local composer = require( "composer" )
- 
 
 local mui = require( "materialui.mui" )
 local muiData = require( "materialui.mui-data" ) 
 local scene = composer.newScene()
  
-local paciente = {nome, sus, nascimento, endereco = {}, posto = {}}
+local salvar = function()
+  
+  pacienteController.paciente.nome = mui.getTextFieldProperty("nome", "value")
+  pacienteController.paciente.endereco.logradouro = mui.getTextFieldProperty("logradouro", "value")
+  pacienteController.paciente.endereco.bairro = mui.getTextFieldProperty("bairro", "value")
+  pacienteController.paciente.cartaoSus = mui.getTextFieldProperty("cartao", "value")
+  pacienteController.paciente.dataNascimento = mui.getTextFieldProperty("dataNasc", "value")
+
+  pacienteController:salvar()
+
+end
  
 function scene:create( event )
  
-    local sceneGroup = self.view
-    -- Code here runs when the scene is first created but has not yet appeared on screen
+    local sceneGroup = self.view    
+    pacienteController = controller:criar()
  
 end
  
@@ -25,13 +34,12 @@ function scene:show( event )
         
         mui.init()
 
-        display.newRect(sceneGroup, display.contentCenterX, 0, 320, 38 ).setFillColor = {1, 0, 1}
+    display.newRect(sceneGroup, display.contentCenterX, 0, 320, 38 ).setFillColor = {1, 0, 1}
            
     mui.newTextField({
       parent = sceneGroup,
       labelText = "Nome",
       name = "nome",      
-      --text = nil,
       font = native.systemFont,
       width = 200,
       height = 24,
@@ -47,7 +55,6 @@ function scene:show( event )
       parent = sceneGroup,
       labelText = "Cartão do SUS",
       name = "cartao",      
-      --text = nil,
       font = native.systemFont,
       width = 200,
       height = 24,
@@ -63,7 +70,6 @@ function scene:show( event )
       parent = sceneGroup,
       labelText = "Data Nascimento",
       name = "dataNasc",      
-      --text = nil,
       font = native.systemFont,
       width = 200,
       height = 24,
@@ -77,9 +83,8 @@ function scene:show( event )
 
     mui.newTextField({
       parent = sceneGroup,
-      labelText = "Endereço",
-      name = "endereco",      
-      --text = nil,
+      labelText = "Logradouro",
+      name = "logradouro",      
       font = native.systemFont,
       width = 200,
       height = 24,
@@ -95,7 +100,6 @@ function scene:show( event )
       parent = sceneGroup,
       labelText = "Bairro",
       name = "bairro",      
-      --text = nil,
       font = native.systemFont,
       width = 200,
       height = 24,
@@ -107,29 +111,12 @@ function scene:show( event )
       callBack = mui.textfieldCallBack
     })
 
-    mui.newTextField({
-      parent = sceneGroup,
-      labelText = "Numero",
-      name = "numero",      
-      --text = nil,
-      font = native.systemFont,
-      width = 200,
-      height = 24,
-      x = display.contentCenterX,
-      y = 394,
-      trimAtLength = 5,
-      activeColor = { 0, 1, 1, 1 },
-      inactiveColor = { 0.5, 0.5, 0.5, 1 },
-      callBack = mui.textfieldCallBack
-    })
-
     mui.getTextFieldProperty("nome", "label").x = display.getContentCenterX
     mui.getTextFieldProperty("cartao", "label").x = display.getContentCenterX
     mui.getTextFieldProperty("dataNasc", "label").x = display.getContentCenterX
-    mui.getTextFieldProperty("endereco", "label").x = display.getContentCenterX
+    mui.getTextFieldProperty("logradouro", "label").x = display.getContentCenterX
     mui.getTextFieldProperty("bairro", "label").x = display.getContentCenterX
-    mui.getTextFieldProperty("numero", "label").x = display.getContentCenterX
-
+    
     mui.newRectButton({
         parent = sceneGroup,
         name = "voltar",
@@ -148,9 +135,8 @@ function scene:show( event )
             sceneDestination = "scenes.Login",
             sceneTransitionColor = { 0.73, 0.73, 1 },
             sceneTransitionAnimation = false
-        } -- scene CadastroPaciente.lua
-            
-        })
+        }             
+    })
 
     mui.newRectButton({
         parent = sceneGroup,
@@ -165,15 +151,14 @@ function scene:show( event )
         fillColor = { 0.25, 0.75, 1, 1 },
         textColor = { 1, 1, 1 },
         touchpoint = true,
-         
-        })
+        callBack = salvar         
+    })
 
     mui.getRoundedRectButtonProperty("cadastrar", "text").x = display.getContentCenterX
     mui.getRoundedRectButtonProperty("voltar", "text").x = display.getContentCenterX
  
     elseif ( phase == "did" ) then
-        
-     
+             
     end
 end
 
