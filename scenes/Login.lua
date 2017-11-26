@@ -5,12 +5,6 @@ local muiData = require( "materialui.mui-data" )
 local login = require( "controller.LoginRestController" )
 local usuario = require( "model.Usuario" )
 
-local loginRestController = login:criar()
-
-local log = function()
-  loginRestController:login()
-end
-
 local scene = composer.newScene()
 
 function scene:create( event )
@@ -45,9 +39,7 @@ function scene:show( event )
     })
 
     mui.getTextFieldProperty("cart", "label").x = display.getContentCenterX
-    loginRestController.model.cartao = mui.getTextFieldProperty("cart", "text")
-
-
+    
     mui.newRectButton({
         parent = sceneGroup,
         name = "login",
@@ -61,7 +53,7 @@ function scene:show( event )
         fillColor = { 0.25, 0.75, 1, 1 },
         textColor = { 1, 1, 1 },
         touchpoint = true,
-        callBack = login,        
+        --callBack = login,        
         })
 
     mui.newRectButton({
