@@ -38,7 +38,7 @@ end
 -- show()
 function scene:show( event )
 
-    local teste = {{id = 1, nome = "Fernando"}, {id = 2, nome = "F"}}
+    --local teste = {{id = 1, nome = "Fernando"}, {id = 2, nome = "F"}}
     -- -------
     local jsonT = '[{"id" : "1", "nome" : "Fernando"}, {"id" : "2", "nome" : "k"}, {"id" : "3", "nome" : "e"}, {"id" : "4", "nome" : "a"}]'
     -- -------
@@ -65,7 +65,7 @@ function scene:show( event )
     parent = mui.getParent(),
     name = "teste",
     width = display.contentWidth,
-    height = display.contentHeight,
+    height = display.contentHeight - 50,
     top = 0,
     left = 0, --muiData.safeAreaWidth - 190,
     font = native.systemFont,
