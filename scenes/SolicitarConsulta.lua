@@ -17,8 +17,6 @@ function scene:create( event )
     local sceneGroup = self.view 
 end
  
- 
-
 function scene:show( event )
  
     local sceneGroup = self.view
@@ -96,42 +94,6 @@ function scene:show( event )
     })
 
 
-    mui.newTextBox({
-    name = "observacao",
-    labelText = "Observações",
-    text = "",
-    font = native.systemFont,
-    fontSize = 16,
-    textBoxFontSize = 16,
-    width = 200,
-    height = 100,
-    x = 120,
-    y = 355,
-    trimFakeTextAt = 80, -- trim at 1..79 characters.
-    activeColor = { 0.12, 0.67, 0.27, 1 },
-    inactiveColor = { 0.4, 0.4, 0.4, 1 },
-    callBack = mui.textfieldCallBack,
-    isEditable = true,
-    doneButton = {
-        width = 100,
-        height = 30,
-        fillColor = { 0.25, 0.75, 1, 1 },
-        textColor = { 1, 1, 1 },
-        text = "done",
-        iconText = "done",
-        iconFont = mui.materialFont,
-        x = 102,
-        y = 30,
-        iconFontColor = { 1, 1, 1, 1 },
-        radius = mui.getScaleX(8), -- set to 0 for newRectButton() instead of rounded
-    },
-    overlayBackgroundColor = { 1, 1, 1, 1 },
-    overlayTextBoxBackgroundColor = { .9, .9, .9, 1 },
-    overlayTextBoxHeight = 100,
-    scrollView = scrollView
-})
-
-
 mui.newRectButton({
     parent = mui.getParent(),
     name = "solicitar",
@@ -143,18 +105,10 @@ mui.newRectButton({
     font = native.systemFont,
     fontSize = 16,
     fillColor = { 0.25, 0.75, 1, 1 },
-    textColor = { 1, 1, 1 },
-    iconText = "picture_in_picture",
-    iconFont = mui.materialFont,
+    textColor = { 1, 1, 1 },    
     iconFontColor = { 1, 1, 1, 1 },
-    --iconImage = "1484026171_02.png",
     touchpoint = true,
-    -- callBack = mui.actionSwitchScene,
-    -- callBackData = {
-    --     sceneDestination = "fun",
-    --     sceneTransitionColor = { 0, 0.73, 1 },
-    --     sceneTransitionAnimation = true
-    -- } 
+    
 })
 
 
@@ -162,10 +116,7 @@ mui.newRectButton({
     mui.getWidgetProperty("prioridade", "object").y = 230
 
     mui.getWidgetProperty("especialidade", "object").x = centerX
-    mui.getWidgetProperty("especialidade", "object").y = 318
-
-    mui.getWidgetProperty("observacao", "object").x = centerX
-    mui.getWidgetProperty("observacao", "object").y = 118
+    mui.getWidgetProperty("especialidade", "object").y = 318    
 
     end
 end
