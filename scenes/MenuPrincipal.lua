@@ -34,10 +34,7 @@ function scene:show( event )
         font = native.systemFont,
         fontSize = 16,
         fillColor = { 0.25, 0.75, 1, 1 },
-        textColor = { 1, 1, 1 },
-        iconText = "navigate_before",
-        iconFont = mui.materialFont,
-        iconFontColor = { 1, 1, 1, 1 },
+        textColor = { 1, 1, 1 },        
         touchpoint = true,        
         callBack = mui.actionSwitchScene,
         callBackData = {
@@ -59,9 +56,6 @@ function scene:show( event )
         fontSize = 16,
         fillColor = { 0.25, 0.75, 1, 1 },
         textColor = { 1, 1, 1 },
-        iconText = "add_box",
-        iconFont = mui.materialFont,
-        iconFontColor = { 1, 1, 1, 1 },
         touchpoint = true,        
         callBack = mui.actionSwitchScene,
         callBackData = {

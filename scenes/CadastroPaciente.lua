@@ -142,9 +142,6 @@ function scene:show( event )
         fontSize = 16,
         fillColor = { 0.25, 0.75, 1, 1 },
         textColor = { 1, 1, 1 },
-        iconText = "picture_in_picture",
-        iconFont = mui.materialFont,
-        iconFontColor = { 1, 1, 1, 1 },
         touchpoint = true,
         callBack = mui.actionSwitchScene,
         callBackData = {
@@ -167,11 +164,8 @@ function scene:show( event )
         fontSize = 16,
         fillColor = { 0.25, 0.75, 1, 1 },
         textColor = { 1, 1, 1 },
-        iconText = "plus",
-        iconFont = mui.materialFont,
-        iconFontColor = { 1, 1, 1, 1 },
         touchpoint = true,
-        --callBack = login,        
+         
         })
 
     mui.getRoundedRectButtonProperty("cadastrar", "text").x = display.getContentCenterX

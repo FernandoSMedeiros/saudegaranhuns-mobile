@@ -66,9 +66,6 @@ function scene:show( event )
         fontSize = 16,
         fillColor = { 0.25, 0.75, 1, 1 },
         textColor = { 1, 1, 1 },
-        iconText = "picture_in_picture",
-        iconFont = mui.materialFont,
-        iconFontColor = { 1, 1, 1, 1 },
         touchpoint = true,
         callBack = login,        
         })
@@ -85,10 +82,6 @@ function scene:show( event )
         fontSize = 16,
         fillColor = { 0.25, 0.75, 1, 1 },
         textColor = { 1, 1, 1 },
-        iconText = "picture_in_picture",
-        iconFont = mui.materialFont,
-        iconFontColor = { 1, 1, 1, 1 },
-        --iconImage = "1484026171_02.png",
         touchpoint = true,
         callBack = mui.actionSwitchScene,
         callBackData = {
