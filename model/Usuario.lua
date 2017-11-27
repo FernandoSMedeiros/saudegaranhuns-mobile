@@ -1,9 +1,9 @@
 local Usuario = {
-	nome = nil,
-	cartao = nil	
+	nome,
+	cartao	
 }
 
-function Usuario:criar(nome, cartao)
+function Usuario:criar(nome, cartao)	
 	self.nome = nome
 	self.cartao = cartao
 	return self

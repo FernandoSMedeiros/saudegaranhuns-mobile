@@ -1,7 +1,7 @@
 local json = require("json")
 local consulta = require("model.Consulta")
 
-local PacienteRestController = {view = nil, consulta = {}}
+local ConsultaRestController = {view = nil, consulta = {}}
 
 function ConsultaRestController.criar()
 	ConsultaRestController.consulta = consulta:criar()
@@ -11,7 +11,7 @@ end
 function ConsultaRestController.salvar(event)
 	if event.phase == "began" then
 		local headers = {}
-		local body = json.encode(ConsultaRestController.consulta)
+		local body = ConsultaRestController.consulta.json()
 		local params = {}
   
 		headers["Content-Type"] = "application/json; charset=utf-8" 
@@ -22,22 +22,11 @@ function ConsultaRestController.salvar(event)
 	end	
 end
 
-function PacienteRestController.todos(event)
-	
-	local x = {}
-
+function PacienteRestController.todos(event)	
 	if event.phase == "began" then
-		x = json.decode(network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/", "GET", networkListener)) 
-	end
-
-	return x	
+		return json.decode(network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/", "GET", networkListener)) 
+	end	
 end
-
--- function PacienteRestController.deletar(event)
--- 	if event.phase == "began" then
--- 		network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/" + tabela.id, "DELETE", networkListener)
--- 	end
--- end
 
 function ConsultaRestController.atualizar(event)
 	if event.phase == "began" then

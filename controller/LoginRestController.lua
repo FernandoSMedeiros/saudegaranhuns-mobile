@@ -1,20 +1,38 @@
-local json = require("json")
-local mod = require("Usuario")
+local json = require "json"
+local mod = require("model.Usuario")
+local composer = require("composer")
 
-LoginRestController = {
-	model = mod
+local LoginRestController = {
+	model = mod 
 }
 
 function LoginRestController:criar()
-	LoginRestController[1] = 
+	self.model = mod:criar("", 0) 
 
-	return cartao
+	return LoginRestController
 end
 
-function LoginRestController.login(event)
-	if event.phase == "began" then
-		return json.decode(network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/" .. LoginRestController.model.cartao, "GET", networkListener)) 
-	end	
+function networkListener(event) 
+    
+    if ( event.isError ) then
+        print( "Network error: ", event.response )
+    end
+        
+    local response = event.response
+    local tabela = json.decode( response )
+
+    if tabela ~= nil and tabela.cartao ~= nil then
+        composer.gotoScene("scenes.MenuPrincipal")
+    else
+        print("Errou") 
+    end 
+    
 end
+
+function LoginRestController:login()
+	network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/" .. self.model.cartao , "GET", networkListener)	
+end
+
+
 
 return LoginRestController

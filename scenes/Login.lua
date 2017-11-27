@@ -1,41 +1,34 @@
 local composer = require( "composer" )
 local widget = require( "widget" )
-
 local mui = require( "materialui.mui" )
 local muiData = require( "materialui.mui-data" )
- 
+local loginController = require( "controller.LoginRestController" )
+local usuario = require( "model.Usuario" )
+
 local scene = composer.newScene()
- 
-sus = 0
 
-function definirAnchorXeY (tabela)
-  tabela.anchorX = 0
-  tabela.anchorY = 0
+local logar = function ()
+  loginRestController.model.cartao = mui.getTextFieldProperty("cart", "value")
+  loginRestController:login()
 end
-
-local login = function (event)  
-  print("LOGIN-TEST")
-end
- 
-
- local numCartao 
 
 function scene:create( event )
  
-    local sceneGroup = self.view    
+  local sceneGroup = self.view
+
+  loginRestController = loginController:criar()    
  
 end
 
 function scene:show( event )
- 
-    local sceneGroup = self.view
-    mui.init()
-    local phase = event.phase
- 
-    if ( phase == "will" ) then
 
-    elseif ( phase == "did" ) then
-            
+  local sceneGroup = self.view    
+  local phase = event.phase
+ 
+  if ( phase == "will" ) then
+
+    mui.init()
+
     mui.newTextField({
       parent = sceneGroup,
       labelText = "Cartão do SUS",
@@ -53,7 +46,7 @@ function scene:show( event )
     })
 
     mui.getTextFieldProperty("cart", "label").x = display.getContentCenterX
-
+    
     mui.newRectButton({
         parent = sceneGroup,
         name = "login",
@@ -66,12 +59,9 @@ function scene:show( event )
         fontSize = 16,
         fillColor = { 0.25, 0.75, 1, 1 },
         textColor = { 1, 1, 1 },
-        iconText = "picture_in_picture",
-        iconFont = mui.materialFont,
-        iconFontColor = { 1, 1, 1, 1 },
         touchpoint = true,
-        callBack = login,        
-        })
+        callBack = logar,        
+    })
 
     mui.newRectButton({
         parent = sceneGroup,
@@ -85,22 +75,20 @@ function scene:show( event )
         fontSize = 16,
         fillColor = { 0.25, 0.75, 1, 1 },
         textColor = { 1, 1, 1 },
-        iconText = "picture_in_picture",
-        iconFont = mui.materialFont,
-        iconFontColor = { 1, 1, 1, 1 },
-        --iconImage = "1484026171_02.png",
         touchpoint = true,
         callBack = mui.actionSwitchScene,
         callBackData = {
             sceneDestination = "scenes.CadastroPaciente",
             sceneTransitionColor = { 0.73, 0.73, 1 },
-            sceneTransitionAnimation = true
-        } -- scene CadastroPaciente.lua
-        })
+            sceneTransitionAnimation = false
+        } 
+    })
 
     mui.getRoundedRectButtonProperty("login", "text").x = display.getContentCenterX
     mui.getRoundedRectButtonProperty("cadastrar", "text").x = display.getContentCenterX
 
+    elseif ( phase == "did" ) then
+    
     end
 end
 
@@ -113,7 +101,6 @@ function scene:destroy( event )
     mui.destroy()
  
 end
- 
  
 -- -----------------------------------------------------------------------------------
 -- Scene event function listeners
