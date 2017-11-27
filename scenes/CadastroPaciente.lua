@@ -1,10 +1,21 @@
 local controller = require("controller.PacienteRestController")
+local postoController = require("controller.PostoRestController")
 
 local composer = require( "composer" )
 
 local mui = require( "materialui.mui" )
 local muiData = require( "materialui.mui-data" ) 
 local scene = composer.newScene()
+
+local lista = nil
+--lista = postoController.todos()
+
+lista = {
+  {id= 1,nome="posto são vicente", endereco={logradouro="blá", numero="20", bairro="centro"}},
+  {id= 2,nome="posto são mario", endereco={logradouro="blá", numero="23", bairro="bela vista"}},
+  {id= 3,nome="posto são joao", endereco={logradouro="blá", numero="12", bairro="quatis"}},
+  {id= 4,nome="posto pracinha", endereco={logradouro="blá", numero="4", bairro="santa rosa"}},
+}
  
 local salvar = function()
   
@@ -13,9 +24,35 @@ local salvar = function()
   pacienteController.paciente.endereco.bairro = mui.getTextFieldProperty("bairro", "value")
   pacienteController.paciente.cartaoSus = mui.getTextFieldProperty("cartao", "value")
   pacienteController.paciente.dataNascimento = mui.getTextFieldProperty("dataNasc", "value")
+  
+  --Adiciona a tabela posto ao atributo posto do controller, no select ele não pode receber a tabela
+  id=mui.getTextFieldProperty("posto", "value")
+  for i,v in ipairs(lista) do
+    if id == lista[i].id then
+      pacienteController.paciente.posto = lista[i]
+      break
+    end
+  end
 
   pacienteController:salvar()
 
+end
+
+local function listaSelect()
+  local retorno = {}
+
+  local i = 0
+  for i,v in ipairs(lista) do
+    local linha = {key = "row"..i, text = lista[i].nome, value = lista[i].id, isCategory = false}
+    table.insert(retorno, linha)
+  end
+
+  --[[for k,v in pairs(lista) do
+    local linha = {key = i, text = k.nome, value = k, isCategory = false}
+    table.insert(retorno, linha)
+    i = i + 1
+  end]]
+  return retorno
 end
  
 function scene:create( event )
@@ -59,7 +96,7 @@ function scene:show( event )
       width = 200,
       height = 24,
       x = display.contentCenterX,
-      y = 136,
+      y = 82+(30*2),
       trimAtLength = 5,
       activeColor = { 0, 1, 1, 1 },
       inactiveColor = { 0.5, 0.5, 0.5, 1 },
@@ -74,7 +111,7 @@ function scene:show( event )
       width = 200,
       height = 24,
       x = display.contentCenterX,
-      y = 200,
+      y = 82+(30*4),
       trimAtLength = 5,
       activeColor = { 0, 1, 1, 1 },
       inactiveColor = { 0.5, 0.5, 0.5, 1 },
@@ -89,7 +126,7 @@ function scene:show( event )
       width = 200,
       height = 24,
       x = display.contentCenterX,
-      y = 276,
+      y = 82+(30*6),
       trimAtLength = 5,
       activeColor = { 0, 1, 1, 1 },
       inactiveColor = { 0.5, 0.5, 0.5, 1 },
@@ -104,11 +141,37 @@ function scene:show( event )
       width = 200,
       height = 24,
       x = display.contentCenterX,
-      y = 332,
+      y = 82+(30*8),
       trimAtLength = 5,
       activeColor = { 0, 1, 1, 1 },
       inactiveColor = { 0.5, 0.5, 0.5, 1 },
       callBack = mui.textfieldCallBack
+    })
+
+    local listaSelect = listaSelect()
+    mui.newSelect({
+        name = "posto",
+        labelText = "Posto",
+        text = "Selecione seu posto",
+        font = native.systemFont,
+        textColor = { 0 },
+        fieldBackgroundColor = { 0.096,0.096,0.096 },
+        rowColor = { default={ 1, 1, 1, 1 }, over={ 1, 0.5, 0, 0.2 } }, -- default is the highlighting
+        rowBackgroundColor = { 1, 1, 1, 1 }, -- the drop down color of each row
+        touchpointColor = { 0.4, 0.4, 0.4 }, -- the touchpoint color
+        activeColor = { 0, 1, 1, 1 },
+        inactiveColor = { 0.5, 0.5, 0.5, 1 },
+        strokeColor = { 0.4, 0.4, 0.4, 1 },
+        strokeWidth = 2,
+        width = 200,
+        height = 30,
+        listHeight = 30 * 5,
+        x = display.contentCenterX,
+        y = 82+(30*10),
+        callBackTouch = mui.onRowTouchSelector,
+        scrollListener = nil,
+        list = listaSelect,
+        scrollView = scrollView,
     })
 
     mui.getTextFieldProperty("nome", "label").x = display.getContentCenterX
@@ -116,6 +179,8 @@ function scene:show( event )
     mui.getTextFieldProperty("dataNasc", "label").x = display.getContentCenterX
     mui.getTextFieldProperty("logradouro", "label").x = display.getContentCenterX
     mui.getTextFieldProperty("bairro", "label").x = display.getContentCenterX
+    mui.getTextFieldProperty("posto", "label").x = display.getContentCenterX
+    mui.getTextFieldProperty("posto", "label").size = 14
     
     mui.newRectButton({
         parent = sceneGroup,
@@ -124,7 +189,7 @@ function scene:show( event )
         width = 100,
         height = 30,
         x = display.contentCenterX-60,
-        y = 436,
+        y = 450,
         font = native.systemFont,
         fontSize = 16,
         fillColor = { 0.25, 0.75, 1, 1 },
@@ -145,7 +210,7 @@ function scene:show( event )
         width = 100,
         height = 30,
         x = display.contentCenterX+60,
-        y = 436,
+        y = 450,
         font = native.systemFont,
         fontSize = 16,
         fillColor = { 0.25, 0.75, 1, 1 },
