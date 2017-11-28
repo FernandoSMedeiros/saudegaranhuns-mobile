@@ -8,11 +8,6 @@ local json = require("json")
 
 local scene = composer.newScene()
  
--- -----------------------------------------------------------------------------------
--- Code outside of the scene event functions below will only be executed ONCE unless
--- the scene is removed entirely (not recycled) via "composer.removeScene()"
--- -----------------------------------------------------------------------------------
- 
 function definirAnchorXeY (tabela)
   tabela.anchorX = 0
   tabela.anchorY = 0
@@ -21,25 +16,19 @@ end
 local touch = function (event)
     print(mui.getWidgetProperty("teste", "value"))
 end
- 
--- -----------------------------------------------------------------------------------
--- Scene event functions
--- -----------------------------------------------------------------------------------
- 
--- create()
+
+
 function scene:create( event )
  
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
  
 end
- 
- 
+  
 -- show()
 function scene:show( event )
 
-    --local teste = {{id = 1, nome = "Fernando"}, {id = 2, nome = "F"}}
-    -- -------
+   
     local jsonT = '[{"id" : "1", "nome" : "Fernando"}, {"id" : "2", "nome" : "k"}, {"id" : "3", "nome" : "e"}, {"id" : "4", "nome" : "a"}]'
     -- -------
     local tab = json.decode(jsonT)
