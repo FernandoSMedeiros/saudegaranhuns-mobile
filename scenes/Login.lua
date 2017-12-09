@@ -33,7 +33,6 @@ function scene:show( event )
       parent = sceneGroup,
       labelText = "Cartão do SUS",
       name = "cart",      
-      --text = "Número Cartão do SUS",
       font = native.systemFont,
       width = 200,
       height = 24,

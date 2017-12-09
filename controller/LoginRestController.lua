@@ -30,7 +30,7 @@ function networkListener(event)
 end
 
 function LoginRestController:login()
-	network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/" .. self.model.cartao , "GET", networkListener)	
+	network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/" .. self.model.cartao , "GET", networkListener)    
 end
 
 
