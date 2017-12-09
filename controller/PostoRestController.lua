@@ -3,22 +3,23 @@ local posto = require("model.Posto")
 
 local PostoRestController = {view = nil, posto = {}}
 
-function PostoRestController.criar()
-	PostoRestController.posto = posto:criar()
-	return PostoRestController
+function PostoRestController:criar()
+	self.posto = posto:criar()
+	self:todos()
+	return self
 end
 
-function PostoRestController.todos()	
-	return json.decode(network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/", "GET", networkListener)) 
+function PostoRestController:todos()	
+	network.request( "http://10.28.13.17/postos", "GET", networkListener)
 end
 
-function PostoRestController.buscar(id)	
-	return json.decode(network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/", "GET", networkListener)) 
+function PostoRestController:buscar(id)	
+	network.request( "http://192.168.0.105:8084/CadastroCliente/rest/clientes/", "GET", networkListener) 
 end
 
 function networkListener(event) 
     if ( event.isError ) then
-        print( "Network error: ", event.response )
+        self.posto = json.decode(event.response)        
     else
         print ( "RESPONSE: " .. event.response )
     end
