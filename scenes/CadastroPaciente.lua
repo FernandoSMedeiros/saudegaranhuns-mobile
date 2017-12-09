@@ -10,12 +10,12 @@ local scene = composer.newScene()
 local lista = nil
 --lista = postoController.todos()
 
--- lista = {
---   {id= 1,nome="posto são vicente", endereco={logradouro="blá", numero="20", bairro="centro"}},
---   {id= 2,nome="posto são mario", endereco={logradouro="blá", numero="23", bairro="bela vista"}},
---   {id= 3,nome="posto são joao", endereco={logradouro="blá", numero="12", bairro="quatis"}},
---   {id= 4,nome="posto pracinha", endereco={logradouro="blá", numero="4", bairro="santa rosa"}},
--- }
+lista = {
+  {id= 1,nome="posto são vicente", endereco={logradouro="blá", numero="20", bairro="centro"}},
+  {id= 2,nome="posto são mario", endereco={logradouro="blá", numero="23", bairro="bela vista"}},
+  {id= 3,nome="posto são joao", endereco={logradouro="blá", numero="12", bairro="quatis"}},
+  {id= 4,nome="posto pracinha", endereco={logradouro="blá", numero="4", bairro="santa rosa"}},
+}
  
 local salvar = function()
   

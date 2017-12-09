@@ -19,7 +19,7 @@ end
 
 function networkListener(event) 
     if ( event.isError ) then
-        self.posto = json.decode(event.response)        
+        print(event.response)        
     else
         print ( "RESPONSE: " .. event.response )
     end
