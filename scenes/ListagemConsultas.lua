@@ -50,7 +50,7 @@ function scene:show( event )
         table.insert(list, { key = tab[k].id, text = tab[k].nome, value = k, isCategory = false })
     end
    
-    mui.newTableView({
+   mui.newTableView({
     parent = mui.getParent(),
     name = "teste",
     width = display.contentWidth,
@@ -76,7 +76,29 @@ function scene:show( event )
     categoryColor = { default={0.8,0.8,0.8,0.8} },
     categoryLineColor = { 1, 1, 1, 0 },
     touchpointColor = { 0.4, 0.4, 0.4 },
-})   
+}) 
+
+    
+mui.newRectButton({
+        parent = sceneGroup,
+        name = "voltar",
+        text = "Voltar",
+        width = 100,
+        height = 30,
+        x = display.getContentCenterX,
+        y = 450,
+        font = native.systemFont,
+        fontSize = 16,
+        fillColor = { 0.25, 0.75, 1, 1 },
+        textColor = { 1, 1, 1 },
+        touchpoint = true,
+        callBack = mui.actionSwitchScene,
+        callBackData = {
+            sceneDestination = "scenes.MenuPrincipal",
+            sceneTransitionColor = { 0.73, 0.73, 1 },
+            sceneTransitionAnimation = false
+        } 
+    })  
 
     end
 end
@@ -101,8 +123,11 @@ end
 -- destroy()
 function scene:destroy( event )
  
-    local sceneGroup = self.view
-    -- Code here runs prior to the removal of scene's view
+    local sceneGroup = self.view    
+
+    sceneGroup:removeSelf()
+    sceneGroup = nil
+    mui.destroy()
  
 end
  
